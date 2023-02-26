@@ -1,4 +1,9 @@
 .popup_opened {
-  visibility: visible;
-  opacity: 1;
+    display: flex;
+}
+
+@media screen and (max-width: 620px) {
+    .popup_opened {
+        bottom: 61px;
+    }
 }

@@ -16,7 +16,6 @@
     <section class="profile">
       <div class="profile__avatar-wrap">
         <img src="./images/image.jpg" alt="Изображение профиля" class="profile__avatar">
-        <button type="button" class="profile__avatar-edit-button"></button>
       </div>
       <div class="profile__info">
         <div class="profile__container">
@@ -35,7 +34,6 @@
             <h2 class="elements__title">Карачаевск</h2>
             <div class="elements__like-wrap">
               <button class="elements__like-button"></button>
-              <span class="elements__like-count"></span>
             </div>
           </div>
         </li>
@@ -44,8 +42,7 @@
           <div class="elements__title-wrap">
             <h2 class="elements__title">Гора Эльбрус</h2>
             <div class="elements__like-wrap">
-              <button class="elements__like-button"></button>
-              <span class="elements__like-count"> </span>
+              <button type="button" class="elements__like-button"></button>
             </div>
           </div>
         </li>
@@ -54,8 +51,7 @@
           <div class="elements__title-wrap">
             <h2 class="elements__title">Домбай</h2>
             <div class="elements__like-wrap">
-              <button class="elements__like-button"></button>
-              <span class="elements__like-count"> </span>
+              <button type="button" class="elements__like-button"></button>
             </div>
           </div>
         </li>
@@ -64,8 +60,7 @@
           <div class="elements__title-wrap">
             <h2 class="elements__title">Гора Эльбрус </h2>
             <div class="elements__like-wrap">
-              <button class="elements__like-button"></button>
-              <span class="elements__like-count"></span>
+              <button type="button" class="elements__like-button"></button>
             </div>
           </div>
         </li>
@@ -74,8 +69,7 @@
           <div class="elements__title-wrap">
             <h2 class="elements__title"> Любимое место</h2>
             <div class="elements__like-wrap">
-              <button class="elements__like-button"></button>
-              <span class="elements__like-count"></span>
+              <button type="button" class="elements__like-button"></button>
             </div>
           </div>
         </li>
@@ -84,8 +78,7 @@
           <div class="elements__title-wrap">
             <h2 class="elements__title"> Карачаево-Ч...</h2>
             <div class="elements__like-wrap">
-              <button class="elements__like-button"></button>
-              <span class="elements__like-count">10</span>
+              <button type="button" class="elements__like-button"></button>
             </div>
           </div>
         </li>
@@ -95,18 +88,18 @@
   <footer class="footer">
     <p class="footer__copyrights">&copy; 2020 Mesto Russia</p>
   </footer>
-  <div class="popup popup_profile-edit">
-    <div class="popup__container popup__overlay">
+  <div class="popup">
+    <div class="popup__container">
+      <h2 class="popup__title">Редактировать профиль</h2>
       <form class="popup__form" name="popupForm" novalidate>
-        <h2 class="popup__title">Редактировать профиль</h2>
-        <input name="userName" type="text" class="popup__input popup__input_data-name" placeholder="Имя">
-        <input name="userAbout" type="text" class="popup__input popup__input_data-about" placeholder="Профессия">
+        <input name="userName" type="text" class="popup__input popup__input_data_name" placeholder="Имя">
+        <input name="userAbout" type="text" class="popup__input popup__input_data_about" placeholder="Профессия">
         <button type="submit" class="popup__button">Сохранить</button>
       </form>
       <button type="button" class="popup__close-button"></button>
     </div>
   </div>
-  <script src="./pages/index.js"></script>
+  <script src="./scripts/index.js"></script>
 </body>
 
 </html>
