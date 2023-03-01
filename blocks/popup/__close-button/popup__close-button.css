@@ -1,7 +1,7 @@
 .popup__close-button {
   position: absolute;
-  top: -40px;
-  right: -40px;
+  top: -45px;
+  right: -44px;
   padding: 0;
   display: flex;
   background-image: url(../../../images/add-button.svg);
@@ -24,8 +24,8 @@
 
 @media screen and (max-width: 620px) {
   .popup__close-button {
-    top: -46px;
-    right: 0;
+    top: -39px;
+    right: -3px;
     width: 24px;
     height: 24px;
   }

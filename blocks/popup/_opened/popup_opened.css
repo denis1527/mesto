@@ -1,9 +1,0 @@
-.popup_opened {
-    display: flex;
-}
-
-@media screen and (max-width: 620px) {
-    .popup_opened {
-        bottom: 61px;
-    }
-}
