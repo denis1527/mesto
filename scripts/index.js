@@ -8,13 +8,13 @@ let profilName = document.querySelector('.profile__name');
 let profilAbout = document.querySelector('.profile__about');
 
 function handleOpenPopupForm() {
-  popupProfile.classList.add('popup__opened');
+  popupProfile.classList.add('popup_opened');
   nameInput.value = profilName.textContent;
   aboutInput.value = profilAbout.textContent;
 }
 
 function closePopup(){
-    popupProfile.classList.remove('popup__opened');
+    popupProfile.classList.remove('popup_opened');
   }
 function handleFormSubmit(event) {
   event.preventDefault();
