@@ -24,5 +24,8 @@
     line-height: 17px;
     margin-top: 13px;
     margin-bottom: 0px;
+    max-width: 240px;
+    max-height: 48px;
+    margin-right: 23px;
   }
 }

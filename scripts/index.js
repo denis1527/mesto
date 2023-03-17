@@ -14,7 +14,7 @@ const modalFigurePopupCloseButton = document.querySelector('.popup__close-button
 const popupImage = document.querySelector('.popup__image');
 const placeName = document.querySelector('.popup__input_place_name');
 const placeUrl = document.querySelector('.popup__input_place_url');
-
+const popupCaption = document.querySelector('.popup__caption');
 //Функция открытия попапа
 const openModalWindow = (modalWindow) => {
   modalWindow.classList.add('popup_opened');
@@ -57,7 +57,7 @@ const cardTemplate = document.querySelector('#card-template');
 
 
 function createElement (data) {
-  const cardElement = cardTemplate.content.cloneNode(true).querySelector('.elements__card');
+  const cardElement = cardTemplate.content.querySelector('.elements__card').cloneNode(true);
 
   const cardTitle = cardElement.querySelector('.elements__title');
   cardTitle.textContent = data.name;
@@ -82,7 +82,6 @@ function createElement (data) {
 };
 
 function openPopupWithImage (data) {
-  const popupCaption = document.querySelector('.popup__caption');
   popupCaption.textContent = data.name;
 
 
