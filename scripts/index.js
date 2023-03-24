@@ -114,8 +114,6 @@ function createElement (data) {
   cardImage.addEventListener('click', () => {
     openPopupWithImage(data);
   });
-
-  modalFigurePopupCloseButton.addEventListener('click', () => closeModalWindow(modalFigurePopup));
   
   return cardElement;  
 };
@@ -162,3 +160,5 @@ function addCard (event) {
 
 renderCard();
 cardAddForm.addEventListener('submit', addCard);
+modalFigurePopupCloseButton.addEventListener('click', () => closeModalWindow(modalFigurePopup))
+modalFigurePopup.addEventListener('click', handleClickOverlay)
