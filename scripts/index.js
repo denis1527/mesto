@@ -3,7 +3,7 @@ const modalProfileEditButtonOpen = document.querySelector('.profile__edit-button
 const modalProfileEditButtonClose = document.querySelector('.popup__close-button'); // кнопка закрытия попапа редактирования профиля
 const profileNameInput = document.querySelector('.popup__input_data_name'); // инпут имени попапа редактирования профиля
 const profileAboutInput = document.querySelector('.popup__input_data_about'); // инпут описания попапа редактирования профиля
-const popapFormProfile = document.querySelector('#popup__form-proflile'); // форма попапа
+const modalWindowForm = document.querySelector('.popup__form'); // форма попапа
 const profileName = document.querySelector('.profile__name'); // имя профиля
 const profileAbout = document.querySelector('.profile__about'); // описание профиля
 const modalAddForm = document.querySelector('.popup_card-add'); // попап добавления карточек
@@ -15,14 +15,38 @@ const popupImage = document.querySelector('.popup__image');
 const placeName = document.querySelector('.popup__input_place_name');
 const placeUrl = document.querySelector('.popup__input_place_url');
 const popupCaption = document.querySelector('.popup__caption');
+const addCardForm = modalAddForm.querySelector('.popup__form');
+
 //Функция открытия попапа
 const openModalWindow = (modalWindow) => {
   modalWindow.classList.add('popup_opened');
+  document.addEventListener('keydown', handleEscPress);
 };
 
 //Функция закрытия попапа
 const closeModalWindow = (modalWindow) => {
   modalWindow.classList.remove('popup_opened');
+  document.removeEventListener('keydown', handleEscPress);
+};
+
+//Функция закрытия попапов по клику на оверлей
+const handleClickOverlay = (evt) => {
+  if (evt.target.classList.contains('popup_opened')) {
+    closeModalWindow(evt.target);
+  };
+};
+
+//Вызов функции закрытия попапа по клику на оверлей
+modalProfileEdit.addEventListener('click', handleClickOverlay);
+modalAddForm.addEventListener('click', handleClickOverlay);
+modalFigurePopup.addEventListener('click', handleClickOverlay);
+
+//Функция закрытия попаов по нажатию на Esc
+const handleEscPress = (evt) => {
+  if (evt.key === 'Escape') {
+    const modalOpened = document.querySelector('.popup_opened');
+    closeModalWindow(modalOpened);
+  };
 };
 
 // Функция отправки формы редактирования профиля с отменой стандартной отправки
@@ -33,21 +57,36 @@ function handleProfileEditForm (evt) {
   closeModalWindow (modalProfileEdit);
 }
 
-function profileInputHandler () {
+//Функция передачи имени и описания профиля в поля ввода формы
+function handleProfileInputValue () {
   profileNameInput.value = profileName.textContent;
   profileAboutInput.value = profileAbout.textContent;
 };
 
+const submitButtonAddForm = modalAddForm.querySelector('.popup__button'); //Кнопка сабмита в попапе добавления карточки
+//Функция деактивации кнопки сабмита в попапе добавления карточки
+const handleAddFormButtonState = () => {
+  submitButtonAddForm.classList.add('popup__button_disabled');
+  submitButtonAddForm.disabled = true;
+};
+
 //Вызовы функций открытия, закрытия и отправки попапов
 modalProfileEditButtonOpen.addEventListener('click', function () {
-  profileInputHandler();
+  handleProfileInputValue();
   openModalWindow(modalProfileEdit);
 });
 
 modalProfileEditButtonClose.addEventListener('click', () => closeModalWindow(modalProfileEdit));
- popapFormProfile.addEventListener('submit', handleProfileEditForm);
+modalWindowForm.addEventListener('submit', handleProfileEditForm);
 
-modalAddFormButtonOpen.addEventListener('click', () => openModalWindow(modalAddForm));
+
+
+modalAddFormButtonOpen.addEventListener('click', () => {
+  handleAddFormButtonState();
+  addCardForm.reset();
+  openModalWindow(modalAddForm);
+});
+
 modalAddFormButtonClose.addEventListener('click', () => closeModalWindow(modalAddForm));
 
 
@@ -70,7 +109,7 @@ function createElement (data) {
   deleteButton.addEventListener('click', deleteCardHandler);
 
   const likeButton = cardElement.querySelector('.elements__like-button');
-  likeButton.addEventListener('click',likeCardHandler);
+  likeButton.addEventListener('click',handleLikeButton);
   
   cardImage.addEventListener('click', () => {
     openPopupWithImage(data);
@@ -84,7 +123,6 @@ function createElement (data) {
 function openPopupWithImage (data) {
   popupCaption.textContent = data.name;
 
-
   popupImage.src = data.link;
   popupImage.alt = data.name;
 
@@ -95,7 +133,7 @@ function deleteCardHandler (evt) {
   evt.target.closest('.elements__card').remove();
 }
 
-function likeCardHandler (evt) {
+function handleLikeButton (evt) {
   evt.target.classList.toggle('elements__like-button_active');
 }
 
@@ -108,10 +146,8 @@ function renderCard () {
   elementsContainer.append(...card);
 }
 
-function cardAdd (event) {
+function addCard (event) {
   event.preventDefault();
-
-
 
   const newPlaceName = placeName.value;
   const newPlaceUrl = placeUrl.value;
@@ -125,4 +161,4 @@ function cardAdd (event) {
 }
 
 renderCard();
-cardAddForm.addEventListener('submit', cardAdd);
+cardAddForm.addEventListener('submit', addCard);

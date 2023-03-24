@@ -1,5 +1,4 @@
 .popup__button {
-  margin: 15px auto 37px;
   font-size: 18px;
   font-weight: 400;
   line-height: 21.78px;
@@ -7,10 +6,9 @@
   color: #fff;
   border: none;
   width: 100%;
-  min-height: 46px;
+  min-height: 50px;
   transition: .2s;
   outline: none;
-  border-radius: 2px;
 }
 
 .popup__button:hover {
@@ -22,10 +20,5 @@
   .popup__button {
     font-size: 14px;
     line-height: 17px;
-    margin-top: 13px;
-    margin-bottom: 0px;
-    max-width: 240px;
-    max-height: 48px;
-    margin-right: 23px;
   }
 }
