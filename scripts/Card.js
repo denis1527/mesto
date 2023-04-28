@@ -1,80 +1,49 @@
-//Импорт
-import { popupCaption, popupImage, modalFigurePopup } from './constans.js'
+// Импорт переменных из файла index.js для работы медота увеличения изображения в карточке
+import { openPopup, popupImageZoom as popupZoom, popupImageZoomDescription as popupDescription, popupImageZoomImage as popupImage } from './index.js';
 
-import { openModalWindow } from './utils.js'
-
-export class Card {
-  constructor(data, cardSelector) {
-    this._name = data.name
-    this._link = data.link
-    this._cardSelector = cardSelector
+class Card {
+  // Первый - объект с названием и изображением карточки, второй - template шаблон карточки
+  constructor(object, templateElem) {
+    this._name = object.name;
+    this._image = object.link;
+    this._template = templateElem;
+    this._elementCard = document.querySelector(this._template).content.querySelector('.cards__item').cloneNode(true);
+    this._elementImages = this._elementCard.querySelector('.cards__image');
+    this._elementName = this._elementCard.querySelector('.cards__description');
+    this._likeIcon = this._elementCard.querySelector('.cards__like');
+    this._deleteIcon = this._elementCard.querySelector('.cards__delete');
   }
-
-  //Методы
-
-    //Получение карточки
-  _getCardTemplate() {
-    this._view = document
-      .querySelector(this._cardSelector)
-      .content
-      .querySelector('.elements__card')
-      .cloneNode(true)
+  // Метод лайка карточки
+  _addLikeCard = (event) => {
+    event.target.classList.toggle('cards__like_active');
   }
-
-    //Публичный метод отрисовки карточки
-  renderCard(container) {
-    this._getCardTemplate()
-    this._setEventListeners()
-    this._cardImage = this._view.querySelector('.elements__image')
-    this._cardImage.src = this._link
-    this._cardImage.alt = this._name
-    this._view.querySelector('.elements__title').textContent = this._name
-    container.prepend(this._view)
+  // Метод удаления карточки
+  _deleteCard() {
+    this._elementCard.remove();
   }
-
-    //Слушатели событий
-  _setEventListeners() {
-    //Лайк
-    this._view
-    .querySelector('.elements__like-button')
-    .addEventListener('click', () => {
-      this._handleLikeCard()
-    })
-
-    //Удаление
-    this._view
-    .querySelector('.elements__remove-button')
-    .addEventListener('click', () => {
-      this._handleRemoveCard()
-    })
-
-    //Открытие попапа с изображением
-    this._view
-    .querySelector('.elements__image')
-    .addEventListener('click', () => {
-      this._handleOpenPopupWithImage()
-    })
+  // Метод увеличения изображения карточки
+  _getZoomImages() {
+    popupDescription.textContent = this._name;
+    popupImage.src = this._image;
+    popupImage.alt = this._name;
+    openPopup(popupZoom);
   }
-
-  //Лайк
-  _handleLikeCard() {
-    this._view
-    .querySelector('.elements__like-button').
-    classList.
-    toggle('elements__like-button_active')
+  // Метод создания карточки
+  makeCard() {
+    this._elementName.textContent = this._name;
+    this._elementImages.src = this._image;
+    this._elementImages.alt = this._name;
+    // Навешиваем обработчики на экземпляр класса
+    this._addEventHandler();
+    // Возвращаем готовый экземпляр
+    return this._elementCard;
   }
-
-  //Удаление
-  _handleRemoveCard() {
-    this._view
-    .closest('.elements__card')
-    .remove()
-  }
-
-    //Открытие попапа с изображением
-  _handleOpenPopupWithImage() {
-    popupImage.src = this._link
-    popupCaption.textContent = this._name
-    openModalWindow(modalFigurePopup)
+  // Подготавливаем обработчики для экземпляра
+  _addEventHandler = () => {
+    this._likeIcon.addEventListener('click', event => this._addLikeCard(event))
+    this._deleteIcon.addEventListener('click', event => this._deleteCard(event));
+    this._elementImages.addEventListener('click', () => this._getZoomImages())
   }
 }
+// Экспортируем класс в index.js
+export { Card };
