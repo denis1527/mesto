@@ -1,11 +1,11 @@
 // Импорт списка с карточками и селекторами валидации, классов
-import { objectListCard, classListForm } from '../components/utils/objectList.js';
-import { FormValidator } from '../components/FormValidator.js';
-import { Card } from '../components/Card.js';
-import { Section } from '../components/Section.js';
-import { PopupWithImage } from '../components/PopupWithImage.js';
-import { PopupWithForm } from '../components/PopupWithForm.js';
-import { UserInfo } from '../components/UserInfo.js';
+import { objectListCard, classListForm } from '../scripts/utils/objectList.js';
+import { FormValidator } from '../scripts/FormValidator.js';
+import { Card } from '../scripts/Card.js';
+import { Section } from '../scripts/Section.js';
+import { PopupWithImage } from '../scripts/PopupWithImage.js';
+import { PopupWithForm } from '../scripts/PopupWithForm.js';
+import { UserInfo } from '../scripts/UserInfo.js';
 // Импорт стилей
 import './index.css';
 // Импорт задействованных в index переменных
@@ -14,7 +14,7 @@ import {
   popupCards, formProfile,
   nameCardInput, linkCardInput,
   nameInput, descriptionInput
-} from '../components/utils/constants.js';
+} from '../scripts/utils/constants.js';
 // Объявление popup всплывающего изображения
 const popupImageZoom = new PopupWithImage('#image-popup');
 popupImageZoom.setEventListeners();
