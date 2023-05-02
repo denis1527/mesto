@@ -1,22 +1,14 @@
 {
   "name": "mesto",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "The project \"Mesto\" of the course \"Web developer\" from Yandex Practicum",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack serve"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/denis1527/mesto.git"
-  },
-  "author": "Thomas Nikolayev",
+  "author": "Denis",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/denis1527/mesto/issues"
-  },
-  "homepage": "https://github.com/denis1527/mesto#readme",
   "devDependencies": {
     "@babel/core": "^7.20.2",
     "@babel/preset-env": "^7.20.2",
