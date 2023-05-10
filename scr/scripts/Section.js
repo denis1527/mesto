@@ -1,18 +1,17 @@
 class Section {
-  // Первым параметром конструктор принимает объект с двумя свойствами: items и renderer, второй параметр — селектор контейнера
-  constructor({ items, renderer }, templateSelector) {
-    this._initialItems = items;
+  // Первым параметром конструктор принимает объект renderer, второй параметр — селектор контейнера
+  constructor({ renderer }, selector) {
     this._renderer = renderer;
-    this._templateContainer = document.querySelector(templateSelector);
+    this._container = document.querySelector(selector);
   }
   // Метод отрисовки всех элементов
-  renderItems() {
-    this._initialItems.forEach(this._renderer);
+  renderItems(res) {
+    res.forEach(this._renderer);
   }
   // Метод принимает DOM-элемент и добавляет его в контейнер
   addItem(cardElement) {
-    this._templateContainer.prepend(cardElement);
+    this._container.prepend(cardElement);
   }
 }
-
+// Экспортируем класс в index.js
 export { Section };

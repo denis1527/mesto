@@ -28,5 +28,5 @@ class Popup {
     });
   }
 }
-
+// Экспортируем класс в index.js
 export { Popup };

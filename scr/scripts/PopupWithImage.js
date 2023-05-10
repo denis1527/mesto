@@ -4,8 +4,9 @@ class PopupWithImage extends Popup {
   // Принимает в конструктор селектор popup
   constructor(popupSelector) {
     super(popupSelector);
-    this._popupDescription = document.querySelector('.popup__description');
-    this._popupImage = document.querySelector('.popup__image');
+    // this._popupItem находится в родительском классе
+    this._popupDescription = this._popupItem.querySelector('.popup__description');
+    this._popupImage = this._popupItem.querySelector('.popup__image');
   }
   // Метод перезаписывает родительский метод open
   open(description, image) {
@@ -16,5 +17,5 @@ class PopupWithImage extends Popup {
     super.open();
   }
 }
-
+// Экспортируем класс в index.js
 export { PopupWithImage };
