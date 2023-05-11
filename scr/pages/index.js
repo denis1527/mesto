@@ -1,14 +1,14 @@
 // Импорт списка с карточками и селекторами валидации, классов
-import { classListForm } from '../scripts/utils/constants.js';
-import { apiFindings } from '../scripts/utils/apiFindings.js';
-import { FormValidator } from '../scripts/FormValidator.js';
-import { Card } from '../scripts/Card.js';
-import { Section } from '../scripts/Section.js';
-import { PopupNotice } from '../scripts/PopupNotice.js';
-import { PopupWithImage } from '../scripts/PopupWithImage.js';
-import { PopupWithForm } from '../scripts/PopupWithForm.js';
-import { UserInfo } from '../scripts/UserInfo.js';
-import { Api } from '../scripts/Api.js';
+import { classListForm } from '../components/utils/constants.js';
+import { apiFindings } from '../components/utils/apiFindings.js';
+import { FormValidator } from '../components/FormValidator.js';
+import { Card } from '../components/Card.js';
+import { Section } from '../components/Section.js';
+import { PopupNotice } from '../components/PopupNotice.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
+import { PopupWithForm } from '../components/PopupWithForm.js';
+import { UserInfo } from '../components/UserInfo.js';
+import { Api } from '../components/Api.js';
 // Импорт стилей
 import './index.css';
 // Импорт задействованных в index переменных
@@ -17,7 +17,7 @@ import {
   formCards, formProfile,
   nameInput, descriptionInput,
   popupAvatarEditForm, iconAvatarEdit
-} from '../scripts/utils/elements.js';
+} from '../components/utils/elements.js';
 // Объявление экземпляра API
 const apiConnect = new Api(apiFindings);
 // Переменная для хранения ID пользователя

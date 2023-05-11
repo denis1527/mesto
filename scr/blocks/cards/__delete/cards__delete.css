@@ -7,7 +7,7 @@
   min-width: 18px;
   min-height: 19px;
   border: none;
-  background: transparent url('../../../images/remove-button.svg') no-repeat;
+  background: transparent url('../../../images/icon/trash.svg') no-repeat;
   transition: all 0.4s ease-in-out;
 }
 
