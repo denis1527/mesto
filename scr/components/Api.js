@@ -4,7 +4,7 @@ class Api {
     this._headers = headers;
   }
   // Метод обработки ответа сервера
-  _processingServerResponse(res) {
+  _checkResponse(res) {
     if (res.ok) {
       return res.json();
     } else {
@@ -17,7 +17,7 @@ class Api {
       headers: this._headers
       // По умолчанию fetch — это GET, можно не указывать
     })
-      .then(res => { return this._processingServerResponse(res); })
+      .then(res => { return this._checkResponse(res); })
   }
   // Метод добавления новой карточки на сервер
   addNewCard({ name, link }) {
@@ -26,7 +26,7 @@ class Api {
       method: 'POST',
       body: JSON.stringify({ name, link })
     })
-      .then(res => { return this._processingServerResponse(res); })
+      .then(res => { return this._checkResponse(res); })
   }
   // Метод удаления карточки с сервера
   deleteCard(cardId) {
@@ -34,7 +34,7 @@ class Api {
       headers: this._headers,
       method: 'DELETE',
     })
-      .then(res => { return this._processingServerResponse(res); })
+      .then(res => { return this._checkResponse(res); })
   }
   // Метод получения данных пользователя с сервера
   getUserData() {
@@ -42,7 +42,7 @@ class Api {
       headers: this._headers
       // По умолчанию fetch — это GET, можно не указывать
     })
-      .then(res => { return this._processingServerResponse(res); })
+      .then(res => { return this._checkResponse(res); })
   }
   // Метод отправки данных пользователя на сервер
   sendUserData(profileData) {
@@ -51,7 +51,7 @@ class Api {
       method: 'PATCH',
       body: JSON.stringify({ name: profileData.username, about: profileData.description })
     })
-      .then(res => { return this._processingServerResponse(res); })
+      .then(res => { return this._checkResponse(res); })
   }
   // Метод отправки данных о новом аватаре на сервер
   sendAvatarData(avatarLink) {
@@ -60,7 +60,7 @@ class Api {
       method: 'PATCH',
       body: JSON.stringify({ avatar: avatarLink.avatar })
     })
-      .then(res => { return this._processingServerResponse(res); })
+      .then(res => { return this._checkResponse(res); })
   }
   // Метод отправки лайка на сервер
   putCardLike(cardId) {
@@ -68,7 +68,7 @@ class Api {
       headers: this._headers,
       method: 'PUT',
     })
-      .then(res => { return this._processingServerResponse(res); })
+      .then(res => { return this._checkResponse(res); })
   }
   // Метод удаления лайка с сервера
   deleteCardLike(cardId) {
@@ -76,7 +76,7 @@ class Api {
       headers: this._headers,
       method: 'DELETE',
     })
-      .then(res => { return this._processingServerResponse(res); })
+      .then(res => { return this._checkResponse(res); })
   }
 }
 // Экспорт класса

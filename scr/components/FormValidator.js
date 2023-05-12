@@ -1,5 +1,5 @@
 class FormValidator {
-    // Первый - объект с классами для валидации, второй - объект для валидации
+  // Первый - объект с классами для валидации, второй - объект для валидации
   constructor(validationSettings, formElement) {
     this._validationSettings = validationSettings;
     this._formElement = formElement;

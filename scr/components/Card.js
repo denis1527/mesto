@@ -11,8 +11,8 @@ class Card {
     this._cardId = authorData.cardId;
     this._authorId = authorData.authorId;
     // Handle данные
-    this._cardZoom = handleActions.handleCardZoom;
-    this._cardDelete = handleActions.handleCardDelete;
+    this._handleZoom = handleActions.handleCardZoom;
+    this._handleDelete = handleActions.handleCardDelete;
     this._putLike = handleActions.handleCardLike;
     this._removeLike = handleActions.handleCardDeleteLike;
   }
@@ -30,10 +30,10 @@ class Card {
   renderCardLike(card) {
     this._likeArea = card.likes;
     if (this._likeArea.length === 0) {
-      this.likeSelector.textContent = '';
+      this.like.textContent = '';
     } else {
       // Брать количество лайков из ответа сервера
-      this.likeSelector.textContent = this._likeArea.length;
+      this.like.textContent = this._likeArea.length;
     }
     if (this._likedCard()) {
       this._likeIcon.classList.add('cards__like_active');
@@ -62,7 +62,7 @@ class Card {
     this._elementName = this._cardElement.querySelector('.cards__description');
     this._likeIcon = this._cardElement.querySelector('.cards__like');
     this._deleteIcon = this._cardElement.querySelector('.cards__delete');
-    this.likeSelector = this._cardElement.querySelector('.cards__like-counter');
+    this.like = this._cardElement.querySelector('.cards__like-counter');
     // Передаём данные в карточку
     this._elementName.textContent = this._cardName;
     this._elementImages.src = this._cardImage;
@@ -76,9 +76,9 @@ class Card {
   // Подготавливаем обработчики для экземпляра
   _addEventHandlers = () => {
     this._likeIcon.addEventListener('click', () => this._interactLike())
-    this._elementImages.addEventListener('click', () => this._cardZoom(this._cardName, this._cardImage));
+    this._elementImages.addEventListener('click', () => this._handleZoom(this._cardName, this._cardImage));
     if (this._userId === this._authorId) {
-      this._deleteIcon.addEventListener('click', () =>  this._cardDelete(this, this._cardId));
+      this._deleteIcon.addEventListener('click', () =>  this._handleDelete(this, this._cardId));
     } else {
       this._deleteIcon.remove();
     }

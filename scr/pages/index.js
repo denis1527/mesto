@@ -1,6 +1,6 @@
 // Импорт списка с карточками и селекторами валидации, классов
-import { classListForm } from '../components/utils/constants.js';
-import { apiFindings } from '../components/utils/apiFindings.js';
+import { classListForm } from '../utils/constants.js';
+import { apiFindings } from '../utils/apiFindings.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Card } from '../components/Card.js';
 import { Section } from '../components/Section.js';
@@ -17,14 +17,14 @@ import {
   formCards, formProfile,
   nameInput, descriptionInput,
   popupAvatarEditForm, iconAvatarEdit
-} from '../components/utils/elements.js';
+} from '../utils/elements.js';
 // Объявление экземпляра API
 const apiConnect = new Api(apiFindings);
 // Переменная для хранения ID пользователя
 let userId;
 // Получение данных пользователя
 const userInfo = new UserInfo({
-  usernameSelector: '.profile__name',
+  userNameSelector: '.profile__name',
   userDescriptionSelector: '.profile__description',
   userAvatarSelector: '.profile__avatar'
 });
@@ -37,14 +37,16 @@ const renderCard = function (cardObject) {
     // Удаление карточки
     handleCardDelete: (cardElement, cardId) => { popupNoticeDelete.open(cardElement, cardId) },
     // Добавление лайка
-    handleCardLike: (cardId) => { apiConnect.putCardLike(cardId)
+    handleCardLike: (cardId) => {
+      apiConnect.putCardLike(cardId)
         .then((res) => {
           cardItem.renderCardLike(res);
         })
         .catch((err) => { console.log(`При лайке карточки возникла ошибка, ${err}`) })
     },
     // Удаление лайка
-    handleCardDeleteLike: (cardId) => { apiConnect.deleteCardLike(cardId)
+    handleCardDeleteLike: (cardId) => {
+      apiConnect.deleteCardLike(cardId)
         .then((res) => {
           cardItem.renderCardLike(res);
         })
@@ -60,19 +62,20 @@ const renderInitialCards = new Section({
   }
 }, '.cards');
 // Общий промис, срабатывающий при положительном результате обоих запросов
-Promise.all([ apiConnect.getUserData(), apiConnect.getInitialCards() ]).then(([ userProfileData, cardObject ]) => {
-    userId = userProfileData._id;
-    userInfo.setUserInfo({ username: userProfileData.name, description: userProfileData.about });
-    renderInitialCards.renderItems(cardObject.reverse());
-    userInfo.setUserAvatar(userProfileData.avatar);
-  })
+Promise.all([apiConnect.getUserData(), apiConnect.getInitialCards()]).then(([userProfileData, cardObject]) => {
+  userId = userProfileData._id;
+  userInfo.setUserInfo({ username: userProfileData.name, description: userProfileData.about });
+  renderInitialCards.renderItems(cardObject.reverse());
+  userInfo.setUserAvatar(userProfileData.avatar);
+})
   .catch((err) => { console.log(`Возникла глобальная ошибка, ${err}`) })
 // Объявление popup всплывающего изображения
 const popupImageZoom = new PopupWithImage('#image-popup');
 popupImageZoom.setEventListeners();
 // Объявление popup редактирования аватара
 const popupEditeAvatar = new PopupWithForm('#avatar-popup', {
-  callbackFormSubmit: (userProfileData) => { popupEditeAvatar.putSavingProcessText(); apiConnect.sendAvatarData(userProfileData)
+  callbackFormSubmit: (userProfileData) => {
+    popupEditeAvatar.putSavingProcessText(); apiConnect.sendAvatarData(userProfileData)
       .then((res) => {
         userInfo.setUserAvatar(res.avatar);
         popupEditeAvatar.close();
@@ -86,7 +89,8 @@ const popupEditeAvatar = new PopupWithForm('#avatar-popup', {
 popupEditeAvatar.setEventListeners();
 // Объявление popup подтверждения удаления карточки
 const popupNoticeDelete = new PopupNotice("#delete-card", {
-  callbackNotice: (cardElement, cardId) => { apiConnect.deleteCard(cardId)
+  callbackNotice: (cardElement, cardId) => {
+    apiConnect.deleteCard(cardId)
       .then(() => {
         cardElement.deleteCard();
         popupNoticeDelete.close();
@@ -97,7 +101,8 @@ const popupNoticeDelete = new PopupNotice("#delete-card", {
 popupNoticeDelete.setEventListeners();
 // Объявление popup редактирования профиля
 const popupEditeProfile = new PopupWithForm('#profile-popup', {
-  callbackFormSubmit: (userProfileData) => { popupEditeProfile.putSavingProcessText(); apiConnect.sendUserData(userProfileData)
+  callbackFormSubmit: (userProfileData) => {
+    popupEditeProfile.putSavingProcessText(); apiConnect.sendUserData(userProfileData)
       .then((res) => {
         userInfo.setUserInfo({ username: res.name, description: res.about });
         popupEditeProfile.close();
@@ -111,7 +116,8 @@ const popupEditeProfile = new PopupWithForm('#profile-popup', {
 popupEditeProfile.setEventListeners();
 // Объявление popup добавления новой карточки
 const popupAddCard = new PopupWithForm('#cards-popup', {
-  callbackFormSubmit: (formValues) => { popupAddCard.putSavingProcessText(); apiConnect.addNewCard({ name: formValues.placename, link: formValues.placeimage })
+  callbackFormSubmit: (formValues) => {
+    popupAddCard.putSavingProcessText(); apiConnect.addNewCard({ name: formValues.placename, link: formValues.placeimage })
       .then((card) => {
         renderInitialCards.addItem(renderCard(card));
         popupAddCard.close();
